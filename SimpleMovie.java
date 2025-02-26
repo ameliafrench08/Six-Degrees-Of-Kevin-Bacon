@@ -55,6 +55,34 @@ public class SimpleMovie {
         return kevinBaconMovies;
     }
 
+    public static ArrayList<SimpleMovie> specificActorMovies(String actor){
+        ArrayList<SimpleMovie> movies = MovieDatabaseBuilder.getMovieDB("src/movie_data");
+        ArrayList<SimpleMovie> actorMovies = new ArrayList<SimpleMovie>();
+
+        assert movies != null;
+        for (SimpleMovie movie : movies){
+            if (movie.searchCast(actor)){
+                actorMovies.add(movie);
+            }
+        }
+        return actorMovies;
+    }
+
+    public static boolean actorKevinBaconFirst(String actor){
+        ArrayList<SimpleMovie> specificActorMovies = specificActorMovies(actor);
+        ArrayList<SimpleMovie> kevinBaconMovies = kevinBaconMovies();
+
+        for (SimpleMovie movie : specificActorMovies){
+            for (SimpleMovie movie2 : kevinBaconMovies){
+                if (movie == movie2){
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public String toString() {
         return "Title: " + title + "\n" + "Actors: " + actors + "\n";
     }
